@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "blogadmin",
-    "password": "123456",
-    "database": "blog_development",
+    "password": "a123B456%",
+    "database": "ppap",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
