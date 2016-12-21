@@ -35,9 +35,11 @@ class LoginPage extends Component {
         userName: ''
       });
       console.log(result);
+      const { createdId } = result;
+      this.props.setUserID(createdId);
     }).catch(function(err) {
         console.log("Error logging in", err);
-     });
+    });
   }
 
   handleUserNameChange = e => {

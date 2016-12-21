@@ -9,6 +9,7 @@ import LoginPage from './LoginPage';
 class App extends Component {
   state = {
     route: window.location.hash.substr(1),
+    userId: null,
   };
 
   componentDidMount() {
@@ -19,22 +20,26 @@ class App extends Component {
     });
   }
 
+  setUserID(id) {
+    this.setState({ userId: id });
+  }
+
   renderRoute() {
     if (this.state.route === '/auth') {
-      return <LoginPage />;
+      return <LoginPage setUserID={this.setUserID.bind(this)} />;
     }
 
     if (this.state.route === '/articles') {
-      return <ArticlesPage />;
+      return <ArticlesPage userId={this.state.userId} />;
     }
 
     if (this.state.route === '/articles/new') {
-      return <CreateArticlePage />;
+      return <CreateArticlePage userId={this.state.userId} />;
     }
 
     if (this.state.route.startsWith('/articles/')) {
       const id = this.state.route.split('/articles/')[1];
-      return <SingleArticlePage id={id} />;
+      return <SingleArticlePage id={id} userId={this.state.userId} />;
     }
 
     return <HomePage />;
