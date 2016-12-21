@@ -12,7 +12,7 @@
 
 ### Step 3: migrates the database
  - You'll need to install sequelize-cli to do this
- - `\[sequlize binary\] migrate` will use the migration files to config your database
+ - `[sequlize binary] migrate` will use the migration files to config your database
 
 ### Step 4: start dealing with the project
  - Now you finish all the basic settings and can start building your own blog system!
