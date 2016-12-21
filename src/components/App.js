@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import ArticlesPage from './ArticlesPage';
 import SingleArticlePage from './SingleArticlePage';
 import CreateArticlePage from './CreateArticlePage';
+import LoginPage from './LoginPage';
 
 class App extends Component {
   state = {
@@ -19,6 +20,10 @@ class App extends Component {
   }
 
   renderRoute() {
+    if (this.state.route === '/auth') {
+      return <LoginPage />;
+    }
+
     if (this.state.route === '/articles') {
       return <ArticlesPage />;
     }
@@ -77,6 +82,9 @@ class App extends Component {
               </li>
               <li>
                 <a href="#/articles">Articles</a>
+              </li>
+              <li>
+                <a href="#/auth">Login</a>
               </li>
             </ul>
           </div>
