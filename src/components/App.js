@@ -9,18 +9,18 @@ class App extends Component {
     return {
       loggedIn: auth.loggedIn()
     }
-  },
+  }
 
   updateAuth(loggedIn) {
     this.setState({
       loggedIn
     })
-  },
+  }
 
   componentWillMount() {
     auth.onChange = this.updateAuth
     auth.login()
-  },
+  }
 
 
 
