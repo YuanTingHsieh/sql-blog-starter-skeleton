@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Breadcrumbs from 'react-breadcrumbs';
+import auth from '../utils/auth';
 
 class App extends Component {
-  state = {
-    route: window.location.hash.substr(1),
-    userId: null,
-  };
 
-  componentDidMount() {
-    window.addEventListener('hashchange', () => {
-      this.setState({
-        route: window.location.hash.substr(1),
-      });
-    });
-  }
+  getInitialState() {
+    return {
+      loggedIn: auth.loggedIn()
+    }
+  },
 
-  setUserID(id) {
-    this.setState({ userId: id });
-  }
+  updateAuth(loggedIn) {
+    this.setState({
+      loggedIn
+    })
+  },
+
+  componentWillMount() {
+    auth.onChange = this.updateAuth
+    auth.login()
+  },
 
 
 
@@ -31,6 +33,7 @@ class App extends Component {
               <Link className="navbar-brand" to="/">Web Seminar - Blog</Link>
             </div>
             <ul className="nav navbar-nav">
+              <li><Link to="/about">About</Link></li>
               <li>
                 <Link to="/" onlyActiveOnIndex>Home</Link>
               </li>
@@ -38,7 +41,7 @@ class App extends Component {
                 <Link to="/articles">Articles</Link>
               </li>
               <li>
-                <Link to="/auth">Login</Link>
+                <Link to="/login">Login</Link>
               </li>
             </ul>
           </div>

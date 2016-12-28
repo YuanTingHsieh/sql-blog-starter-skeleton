@@ -8,12 +8,14 @@ import ArticlesPage from './components/ArticlesPage';
 import SingleArticlePage from './components/SingleArticlePage';
 import CreateArticlePage from './components/CreateArticlePage';
 import LoginPage from './components/LoginPage';
+import About from './components/About';
 
 render((
   <Router history={browserHistory}>
     <Route path="/" name="Home" component={App}>
       <IndexRoute name="Home" component={HomePage}/>
-      <Route path="/auth" name="Login" component={LoginPage}/>
+      <Route path="/about" name="About" component={About}/>
+      <Route path="/login" name="Login" component={LoginPage}/>
       <Route path="/articles" name="Articles" component={ArticlesPage}/>
       <Route path="/articles/new" name="Create Article" component={CreateArticlePage}/>
       <Route path="/articles/:userName/:id" name="Single Article" component={SingleArticlePage}/>

@@ -28,7 +28,8 @@ class LoginPage extends Component {
       method: 'POST',
       body: JSON.stringify(body),
       credentials: 'same-origin'
-    }).then(result => {
+    }).then(res => res.json())
+    .then(result => {
       this.setState({
         email: '',
         password: '',
