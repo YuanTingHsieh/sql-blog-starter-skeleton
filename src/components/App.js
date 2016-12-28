@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-
-import HomePage from './HomePage';
-import ArticlesPage from './ArticlesPage';
-import SingleArticlePage from './SingleArticlePage';
-import CreateArticlePage from './CreateArticlePage';
-import LoginPage from './LoginPage';
+import { Link } from 'react-router';
+import Breadcrumbs from 'react-breadcrumbs';
 
 class App extends Component {
   state = {
@@ -24,54 +20,7 @@ class App extends Component {
     this.setState({ userId: id });
   }
 
-  renderRoute() {
-    if (this.state.route === '/auth') {
-      return <LoginPage setUserID={this.setUserID.bind(this)} />;
-    }
 
-    if (this.state.route === '/articles') {
-      return <ArticlesPage userId={this.state.userId} />;
-    }
-
-    if (this.state.route === '/articles/new') {
-      return <CreateArticlePage userId={this.state.userId} />;
-    }
-
-    if (this.state.route.startsWith('/articles/')) {
-      const id = this.state.route.split('/articles/')[1];
-      return <SingleArticlePage id={id} userId={this.state.userId} />;
-    }
-
-    return <HomePage />;
-  }
-
-  renderBreadcrumb() {
-    if (this.state.route === '/articles') {
-      return (
-        <ol className="breadcrumb">
-          <li><a href="#/">Home</a></li>
-          <li><a href="#/articles">Articles</a></li>
-        </ol>
-      );
-    }
-
-    if (this.state.route.startsWith('/articles/')) {
-      const id = this.state.route.split('/articles/')[1];
-      return (
-        <ol className="breadcrumb">
-          <li><a href="#/">Home</a></li>
-          <li><a href="#/articles">Articles</a></li>
-          <li><a href={`#/articles/${id}`}>{id}</a></li>
-        </ol>
-      );
-    }
-
-    return (
-      <ol className="breadcrumb">
-        <li><a href="#/">Home</a></li>
-      </ol>
-    );
-  }
 
   render() {
     return (
@@ -79,17 +28,17 @@ class App extends Component {
         <nav className="navbar navbar-default navbar-static-top">
           <div className="container">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#/">Web Seminar - Blog</a>
+              <Link className="navbar-brand" to="/">Web Seminar - Blog</Link>
             </div>
             <ul className="nav navbar-nav">
               <li>
-                <a href="#/">Home</a>
+                <Link to="/" onlyActiveOnIndex>Home</Link>
               </li>
               <li>
-                <a href="#/articles">Articles</a>
+                <Link to="/articles">Articles</Link>
               </li>
               <li>
-                <a href="#/auth">Login</a>
+                <Link to="/auth">Login</Link>
               </li>
             </ul>
           </div>
@@ -97,11 +46,11 @@ class App extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              {this.renderBreadcrumb()}
+              <Breadcrumbs wrapperClass="breadcrumb" routes={this.props.routes} params={this.props.params} setDocumentTitle={true}/>
             </div>
           </div>
         </div>
-        {this.renderRoute()}
+        {this.props.children}
       </div>
     );
   }
